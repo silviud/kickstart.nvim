@@ -239,6 +239,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then error('Error cloning lazy.nvim:\n' .. out) end
 end
 
+-- colorscheme
+-- vim.cmd.colorscheme 'unokai'
+
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
@@ -498,7 +501,7 @@ require('lazy').setup({
       -- and language tooling communicate in a standardized fashion.
       --
       -- In general, you have a "server" which is some tool built to understand a particular
-      -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
+      -- language (such as `gopls`, `lua-language-server`, `rust_analyzer`, etc.). These Language Servers
       -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
       -- processes that communicate with some "client" - in this case, Neovim!
       --
@@ -596,6 +599,9 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
+        ruff = {},
+        ty = {},
+        -- ruff_lsp = {},
         -- rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -614,7 +620,7 @@ require('lazy').setup({
       -- You can press `g?` for help in this menu.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'lua_ls', -- Lua Language server
+        'lua-language-server', -- Lua Language server
         'stylua', -- Used to format Lua code
         -- You can add other tools here that you want Mason to install
       })
@@ -628,7 +634,7 @@ require('lazy').setup({
       end
 
       -- Special Lua Config, as recommended by neovim help docs
-      vim.lsp.config('lua_ls', {
+      vim.lsp.config('lua-language-server', {
         on_init = function(client)
           if client.workspace_folders then
             local path = client.workspace_folders[1].name
@@ -652,7 +658,7 @@ require('lazy').setup({
           Lua = {},
         },
       })
-      vim.lsp.enable 'lua_ls'
+      vim.lsp.enable 'lua-language-server'
     end,
   },
 
@@ -788,25 +794,37 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
+  -- { -- You can easily change to a different colorscheme.
+  --   -- Change the name of the colorscheme plugin below, and then
+  --   -- change the command in the config to whatever the name of that colorscheme is.
+  --   --
+  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   config = function()
+  --     ---@diagnostic disable-next-line: missing-fields
+  --     require('tokyonight').setup {
+  --       styles = {
+  --         comments = { italic = false }, -- Disable italics in comments
+  --       },
+  --     }
+  --
+  --     -- Load the colorscheme here.
+  --     -- Like many other themes, this one has different styles, and you could load
+  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+  --     vim.cmd.colorscheme 'quiet'
+  --     -- vim.cmd.colorscheme 'tokyonight-night'
+  --   end,
+  -- },
 
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+  -- { 'rebelot/kanagawa.nvim', config = function() vim.cmd.colorscheme 'kanagawa-dragon' end },
+
+  { "romanaverin/charleston.nvim",
+    name = "charleston",
+    version = "*",
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'charleston'
     end,
   },
 
@@ -859,6 +877,13 @@ require('lazy').setup({
         callback = function() vim.treesitter.start() end,
       })
     end,
+  },
+  { -- File explorer
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
+    lazy = false,
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function() require('nvim-tree').setup {} end,
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
