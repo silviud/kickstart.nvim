@@ -240,7 +240,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 
 -- colorscheme
--- vim.cmd.colorscheme 'unokai'
+vim.cmd.colorscheme 'unokai'
 
 ---@type vim.Option
 local rtp = vim.opt.rtp
@@ -819,14 +819,14 @@ require('lazy').setup({
 
   -- { 'rebelot/kanagawa.nvim', config = function() vim.cmd.colorscheme 'kanagawa-dragon' end },
 
-  { "romanaverin/charleston.nvim",
-    name = "charleston",
-    version = "*",
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'charleston'
-    end,
-  },
+  -- { "romanaverin/charleston.nvim",
+  --   name = "charleston",
+  --   version = "*",
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'charleston'
+  --   end,
+  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
