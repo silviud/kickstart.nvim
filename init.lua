@@ -240,7 +240,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 
 -- colorscheme
-vim.cmd.colorscheme 'unokai'
+-- vim.cmd.colorscheme 'unokai'
 
 ---@type vim.Option
 local rtp = vim.opt.rtp
@@ -601,6 +601,7 @@ require('lazy').setup({
         -- pyright = {},
         ruff = {},
         ty = {},
+        terraform = {},
         -- ruff_lsp = {},
         -- rust_analyzer = {},
         --
@@ -623,6 +624,8 @@ require('lazy').setup({
         'lua-language-server', -- Lua Language server
         'stylua', -- Used to format Lua code
         -- You can add other tools here that you want Mason to install
+        'terraform-ls', -- escape -
+        'isort', -- py -
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -659,6 +662,10 @@ require('lazy').setup({
         },
       })
       vim.lsp.enable 'lua-language-server'
+      -- vim.lsp.config('terraformls', {
+      --
+      -- })
+      vim.lsp.enable 'terraformls'
     end,
   },
 
@@ -693,7 +700,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'isort', 'ruff' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -812,10 +819,28 @@ require('lazy').setup({
   --     -- Load the colorscheme here.
   --     -- Like many other themes, this one has different styles, and you could load
   --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  --     vim.cmd.colorscheme 'quiet'
-  --     -- vim.cmd.colorscheme 'tokyonight-night'
+  --     vim.cmd.colorscheme 'tokyonight-day'
   --   end,
   -- },
+  { -- You can easily change to a different colorscheme.
+    -- Change the name of the colorscheme plugin below, and then
+    -- change the command in the config to whatever the name of that colorscheme is.
+    --
+    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    'maxmx03/solarized.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require('solarized').setup {}
+
+      -- Load the colorscheme here.
+      -- Like many other themes, this one has different styles, and you could load
+      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+      vim.cmd.colorscheme 'solarized'
+      vim.o.termguicolors = true
+      vim.o.background = 'light'
+    end,
+  },
 
   -- { 'rebelot/kanagawa.nvim', config = function() vim.cmd.colorscheme 'kanagawa-dragon' end },
 
