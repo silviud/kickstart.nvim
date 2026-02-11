@@ -598,9 +598,9 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         gopls = {},
-        -- pyright = {},
-        ruff = {},
-        ty = {},
+        pyright = {},
+        -- ruff = {}, -- doesn't support def ?
+        -- ty = {},  -- jumps to typed files not source
         terraform = {},
         -- ruff_lsp = {},
         -- rust_analyzer = {},
@@ -667,6 +667,7 @@ require('lazy').setup({
       -- })
       vim.lsp.enable 'terraformls'
       vim.lsp.enable 'gopls'
+      -- vim.lsp.enable 'ruff'
 
       -- require("lspconfig").gopls.setup({
       --     cmd = { "gopls" },
