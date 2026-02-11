@@ -597,7 +597,7 @@ require('lazy').setup({
       --  See `:help lsp-config` for information about keys and how to configure
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {},
         -- pyright = {},
         ruff = {},
         ty = {},
@@ -666,6 +666,21 @@ require('lazy').setup({
       --
       -- })
       vim.lsp.enable 'terraformls'
+      vim.lsp.enable 'gopls'
+
+      -- require("lspconfig").gopls.setup({
+      --     cmd = { "gopls" },
+      --     filetypes = { "go", "gomod", "gowork", "gotmpl" },
+      --     root_dir = require("lspconfig").util.root_pattern("go.mod", ".git"),
+      --     settings = {
+      --         gopls = {
+      --             analyses = {
+      --                 unusedparams = true,
+      --             },
+      --             staticcheck = true,
+      --         },
+      --     },
+      -- })
     end,
   },
 
@@ -838,7 +853,7 @@ require('lazy').setup({
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'solarized'
       vim.o.termguicolors = true
-      vim.o.background = 'light'
+      vim.o.background = 'dark'
     end,
   },
 
