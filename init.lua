@@ -597,17 +597,14 @@ require('lazy').setup({
       --  See `:help lsp-config` for information about keys and how to configure
       local servers = {
         -- clangd = {},
-<<<<<<< Updated upstream
         gopls = {},
-        pyright = {},
+        -- pyright = {},
         -- ruff = {}, -- doesn't support def ?
         -- ty = {},  -- jumps to typed files not source
-=======
         -- gopls = {},
         -- pyright = {},
         -- ruff = {},
         -- ty = {},
->>>>>>> Stashed changes
         terraform = {},
         templ = {},
         -- ruff_lsp = {},
@@ -675,7 +672,6 @@ require('lazy').setup({
       --
       -- })
       vim.lsp.enable 'terraformls'
-<<<<<<< Updated upstream
       vim.lsp.enable 'gopls'
       -- vim.lsp.enable 'ruff'
 
@@ -692,7 +688,6 @@ require('lazy').setup({
       --         },
       --     },
       -- })
-=======
       vim.lsp.enable 'templ'
       vim.lsp.config('jedi_language_server', {
         settings = {
@@ -705,8 +700,6 @@ require('lazy').setup({
         },
       })
       vim.lsp.enable 'jedi_language_server'
-      -- vim.lsp.enable 'gopls'
->>>>>>> Stashed changes
     end,
   },
 
