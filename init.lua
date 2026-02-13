@@ -600,11 +600,10 @@ require('lazy').setup({
         gopls = {},
         -- pyright = {},
         -- ruff = {}, -- doesn't support def ?
-        -- ty = {},  -- jumps to typed files not source
+        ty = {}, -- jumps to typed files not source
         -- gopls = {},
         -- pyright = {},
         -- ruff = {},
-        -- ty = {},
         terraform = {},
         templ = {},
         -- ruff_lsp = {},
@@ -630,7 +629,7 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         -- You can add other tools here that you want Mason to install
         'terraform-ls', -- escape -
-        'jedi-language-server', -- escape -
+        -- 'jedi-language-server', -- escape -
         'isort', -- py -
       })
 
@@ -673,7 +672,7 @@ require('lazy').setup({
       -- })
       vim.lsp.enable 'terraformls'
       vim.lsp.enable 'gopls'
-      -- vim.lsp.enable 'ruff'
+      vim.lsp.enable 'ty'
 
       -- require("lspconfig").gopls.setup({
       --     cmd = { "gopls" },
@@ -689,17 +688,17 @@ require('lazy').setup({
       --     },
       -- })
       vim.lsp.enable 'templ'
-      vim.lsp.config('jedi_language_server', {
-        settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-            },
-          },
-        },
-      })
-      vim.lsp.enable 'jedi_language_server'
+      -- vim.lsp.config('jedi_language_server', {
+      --   settings = {
+      --     python = {
+      --       analysis = {
+      --         autoSearchPaths = true,
+      --         useLibraryCodeForTypes = true,
+      --       },
+      --     },
+      --   },
+      -- })
+      -- vim.lsp.enable 'jedi_language_server'
     end,
   },
 
@@ -734,7 +733,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'black' },
+        python = { 'isort', 'ruff' },
         html = { 'djlint' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
