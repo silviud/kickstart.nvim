@@ -943,7 +943,24 @@ require('lazy').setup({
     version = '*',
     lazy = false,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function() require('nvim-tree').setup {} end,
+
+    opts = {
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+          visible = true,
+        },
+      },
+    },
+    config = function()
+      require('nvim-tree').setup {
+        filters = {
+          enable = false,
+          -- git_ignored = false,
+          -- dotfiles = true,
+        },
+      }
+    end,
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
