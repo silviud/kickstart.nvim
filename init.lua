@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -390,6 +390,17 @@ require('lazy').setup({
         --   },
         -- },
         -- pickers = {}
+        pickers = {
+          find_files = {
+            -- Add a custom command to include hidden files
+            -- find_command = { 'rg', '--no-ignore', '--hidden', '--files', '--glob', '!.git/', '!.svn/' },
+            additional_args = { '--no-ignore', '--hidden' },
+          },
+          live_grep = {
+            -- Add command options for live_grep to include hidden and ignored files
+            additional_args = function(opts) return { '--hidden', '--no-ignore' } end,
+          },
+        },
         extensions = {
           ['ui-select'] = { require('telescope.themes').get_dropdown() },
         },
@@ -943,15 +954,6 @@ require('lazy').setup({
     version = '*',
     lazy = false,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-
-    opts = {
-      filesystem = {
-        filtered_items = {
-          hide_dotfiles = false,
-          visible = true,
-        },
-      },
-    },
     config = function()
       require('nvim-tree').setup {
         filters = {
@@ -959,6 +961,16 @@ require('lazy').setup({
           -- git_ignored = false,
           -- dotfiles = true,
         },
+        -- renderer = {
+        --   -- Disable icons
+        --   icons = {
+        --     show = {
+        --       file = false,
+        --       folder = false,
+        --       git = false,
+        --     },
+        --   },
+        -- },
       }
     end,
   },
@@ -1008,6 +1020,9 @@ require('lazy').setup({
       task = '📌',
       lazy = '💤 ',
     },
+  },
+  install = {
+    missing = true, -- Allows missing plugins to be installed later, not at startup
   },
 })
 
