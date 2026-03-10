@@ -717,6 +717,7 @@ require('lazy').setup({
     end,
   },
 
+
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
@@ -1049,6 +1050,8 @@ require('lazy').setup({
     missing = true, -- Allows missing plugins to be installed later, not at startup
   },
 })
+-- configure ty
+-- vim.g.tylap_jump_files = { "*.py", "*.pyi" }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
