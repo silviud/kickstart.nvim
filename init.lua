@@ -394,7 +394,11 @@ require('lazy').setup({
           find_files = {
             -- Add a custom command to include hidden files
             -- find_command = { 'rg', '--no-ignore', '--hidden', '--files', '--glob', '!.git/', '!.svn/' },
-            additional_args = { '--no-ignore', '--hidden' },
+            -- additional_args = { '--no-ignore', '--hidden' },
+            hidden = true,
+            no_ignore_parent = true,
+            no_ignore = true,
+            -- follow = true,
           },
           live_grep = {
             -- Add command options for live_grep to include hidden and ignored files
