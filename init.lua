@@ -961,6 +961,26 @@ require('lazy').setup({
           -- git_ignored = false,
           -- dotfiles = true,
         },
+        -- see bellow to disable
+        renderer = {
+          icons = {
+            glyphs = {
+              default = '', -- Default file icon
+              symlink = '', -- Symlink file icon
+              git = {
+                unstaged = '✗', -- Unstaged file icon
+                staged = '✓', -- Staged file icon
+                untracked = '★', -- Untracked file icon
+              },
+              folder = {
+                default = '📁', -- Default folder icon
+                open = '📂', -- Open folder icon
+                empty = '📁', -- Empty folder icon
+                empty_open = '📂', -- Empty open folder icon
+              },
+            },
+          },
+        },
         -- renderer = {
         --   -- Disable icons
         --   icons = {
